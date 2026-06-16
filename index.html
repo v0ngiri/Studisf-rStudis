@@ -8,21 +8,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome für Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page { display: none; }
+        .page.active { display: block; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
     <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
                     <i class="fa-solid fa-graduation-cap text-indigo-600 text-3xl"></i>
                     <span class="text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">Studis.</span>
                 </div>
                 <div class="hidden md:flex space-x-8 font-medium">
-                    <a href="#services" class="text-gray-600 hover:text-indigo-600 transition">Marktplatz</a>
-                    <a href="#ratings" class="text-gray-600 hover:text-indigo-600 transition">Prof- & Modul-Ratings</a>
-                    <a href="#surveys" class="text-gray-600 hover:text-indigo-600 transition">Empirie-Pool</a>
+                    <button onclick="showPage('marketplace')" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Marktplatz</button>
+                    <button onclick="showPage('home')" href="#ratings" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Prof- & Modul-Ratings</button>
+                    <button onclick="showPage('home')" href="#surveys" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Empirie-Pool</button>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-semibold hidden sm:inline-block">
@@ -36,162 +40,182 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-950 text-white py-20 px-4">
-        <div class="max-w-5xl mx-auto text-center">
-            <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full text-sm font-medium">
-                Von Studierenden für Studierende 🌿
-            </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mt-6 tracking-tight leading-tight">
-                Dein Studium. <br class="hidden md:block">Bessere Noten. Echte Insights.
-            </h1>
-            <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
-                Finde verifizierte Hilfe für deine Hausarbeit, checke ehrliche Bewertungen zu deinen Profs und finde Teilnehmer für deine empirische Forschung.
-            </p>
-            <div class="mt-10 flex flex-wrap justify-center gap-4">
-                <a href="#services" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3 rounded-lg transition shadow-lg">
-                    Hausarbeit-Hilfe finden
-                </a>
-                <a href="#ratings" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium px-6 py-3 rounded-lg transition">
-                    Prof-Ratings ansehen
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Killer Features Section (Ratings & Empirie) -->
-    <section id="ratings" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900">Unsere Killer-Features</h2>
-            <p class="text-gray-500 mt-2">Was uns von normalen Plattformen unterscheidet.</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Feature 1: Ratings -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 text-xl mb-6">
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Individuelles Insider-Rating</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Schluss mit bösen Überraschungen im Semester! Filtere Module, Lehrstühle und Professoren nach Fachbereich (Fach). Erfahre anonym, aber <strong>durch Uni-Mail verifiziert</strong>, wie fair die Notengebung und wie gut die Vorlesung wirklich ist.
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow">
+        
+        <!-- PAGE 1: HOME -->
+        <div id="page-home" class="page active">
+            <!-- Hero Section -->
+            <header class="bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-950 text-white py-20 px-4">
+                <div class="max-w-5xl mx-auto text-center">
+                    <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full text-sm font-medium">
+                        Von Studierenden für Studierende 🌿
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold mt-6 tracking-tight leading-tight">
+                        Dein Studium. <br class="hidden md:block">Bessere Noten. Echte Insights.
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
+                        Finde verifizierte Hilfe für deine Hausarbeit, checke ehrliche Bewertungen zu deinen Profs und finde Teilnehmer für deine empirische Forschung.
                     </p>
-                </div>
-                <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="font-semibold text-gray-700">Beispiel: Prof. Dr. Müller (VWL)</span>
-                        <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> 4.2 / 5</span>
+                    <div class="mt-10 flex flex-wrap justify-center gap-4">
+                        <button onclick="showPage('marketplace')" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3 rounded-lg transition shadow-lg cursor-pointer">
+                            Hausarbeit-Hilfe finden (Marktplatz)
+                        </button>
+                        <a href="#ratings" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium px-6 py-3 rounded-lg transition">
+                            Prof-Ratings ansehen
+                        </a>
                     </div>
                 </div>
-            </div>
+            </header>
 
-            <!-- Feature 2: Umfragen -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl mb-6">
-                        <i class="fa-solid fa-chart-bar"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Empirie-Pool für Hausarbeiten</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Du schreibst eine empirische Haus- oder Bachelorarbeit und brauchst dringend Umfrageteilnehmer? Poste deinen Fragebogen in unserem Netzwerk und erhalte Antworten von echten, verifizierten Studierenden passender Fachrichtungen.
-                    </p>
+            <!-- Killer Features Section -->
+            <section id="ratings" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-slate-900">Unsere Killer-Features</h2>
+                    <p class="text-gray-500 mt-2">Was uns von normalen Plattformen unterscheidet.</p>
                 </div>
-                <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="font-semibold text-gray-700">Aktive Umfragen im Pool:</span>
-                        <span class="bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded">1,420 Teilnehmer online</span>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Feature 1: Ratings -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 text-xl mb-6">
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-4">Individuelles Insider-Rating</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Schluss mit bösen Überraschungen im Semester! Filtere Module, Lehrstühle und Professoren nach Fachbereich (Fach). Erfahre anonym, aber <strong>durch Uni-Mail verifiziert</strong>, wie fair die Notengebung und wie gut die Vorlesung wirklich ist.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-semibold text-gray-700">Beispiel: Prof. Dr. Müller (VWL)</span>
+                                <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> 4.2 / 5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Umfragen -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl mb-6">
+                                <i class="fa-solid fa-chart-bar"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-4">Empirie-Pool für Hausarbeiten</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                Du schreibst eine empirische Haus- oder Bachelorarbeit und brauchst dringend Umfrageteilnehmer? Poste deinen Fragebogen in unserem Netzwerk und erhalte Antworten von echten, verifizierten Studierenden passender Fachrichtungen.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="font-semibold text-gray-700">Aktive Umfragen im Pool:</span>
+                                <span class="bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded">1,420 Teilnehmer online</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Marketplace Section (Hausarbeit Hilfe) -->
-    <section id="services" class="py-16 bg-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-900">Hausarbeit- & Studienhilfe Marktplatz</h2>
-                    <p class="text-gray-600 mt-1">Finde Unterstützung beim Korrekturlesen, Formatieren oder bei der Strukturierung.</p>
-                </div>
-                <!-- Filter -->
-                <div class="flex flex-wrap gap-2 w-full md:w-auto">
-                    <button onclick="filterFach('all')" class="filter-btn bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">Alle Fächer</button>
-                    <button onclick="filterFach('Wirtschaft')" class="filter-btn bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">Wirtschaft</button>
-                    <button onclick="filterFach('Jura')" class="filter-btn bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">Jura</button>
-                    <button onclick="filterFach('Informatik')" class="filter-btn bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">Informatik</button>
-                </div>
+        <!-- PAGE 2: MARKETPLACE (NEW PAGE) -->
+        <div id="page-marketplace" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            
+            <div class="mb-8">
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Studis Marktplatz Berlin 🐻</h1>
+                <p class="text-gray-500 mt-1">Finde qualifizierte studentische Hilfe für deine wissenschaftlichen Arbeiten.</p>
             </div>
 
-            <!-- Marketplace Grid -->
-            <div class="grid md:grid-cols-3 gap-6" id="marketplace-grid">
+            <div class="grid lg:grid-cols-4 gap-8">
                 
-                <!-- Card 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between" data-fach="Wirtschaft">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Wirtschaftswissenschaften</span>
-                            <span class="text-gray-500 text-sm"><i class="fa-solid fa-star text-amber-400"></i> 4.9 (32)</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-gray-900 mb-2">Korrekturlesen & Feedback BWL/VWL Hausarbeiten</h4>
-                        <p class="text-gray-600 text-sm line-clamp-3">Ich helfe dir beim Academic Writing, überprüfe den roten Faden deiner Argumentation und korrigiere Zitierfehler (APA/Harvard).</p>
+                <!-- FILTER SIDEBAR -->
+                <aside class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 h-fit sticky top-20">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg text-slate-900"><i class="fa-solid fa-sliders mr-2 text-indigo-600"></i>Filter</h3>
+                        <button onclick="resetFilters()" class="text-xs text-indigo-600 hover:underline font-medium">Zurücksetzen</button>
                     </div>
-                    <div class="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center font-bold text-xs text-indigo-800">AM</div>
-                            <span class="text-xs font-medium text-gray-700">Anna M. (Master)</span>
-                        </div>
-                        <span class="font-bold text-indigo-600 text-lg">ab 15€ / Seite</span>
-                    </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between" data-fach="Jura">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">Rechtswissenschaften</span>
-                            <span class="text-gray-500 text-sm"><i class="fa-solid fa-star text-amber-400"></i> 5.0 (14)</span>
+                    <!-- Search -->
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Stichwort-Suche</label>
+                        <div class="relative">
+                            <input type="text" id="searchBar" oninput="applyFilters()" placeholder="z.B. Korrektur, Python..." class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-400 text-xs"></i>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-900 mb-2">Gutachtenstil-Check & Remonetarisierung Jura</h4>
-                        <p class="text-gray-600 text-sm line-clamp-3">Prüfung von Zwischenprüfungs-Hausarbeiten im Zivilrecht/ÖffR auf korrekten Gutachtenstil und Argumentationstiefe.</p>
                     </div>
-                    <div class="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center font-bold text-xs text-emerald-800">TL</div>
-                            <span class="text-xs font-medium text-gray-700">Tim L. (Staatsexamen)</span>
-                        </div>
-                        <span class="font-bold text-indigo-600 text-lg">ab 22€ / Std.</span>
-                    </div>
-                </div>
 
-                <!-- Card 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between" data-fach="Informatik">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">Informatik</span>
-                            <span class="text-gray-500 text-sm"><i class="fa-solid fa-star text-amber-400"></i> 4.8 (19)</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-gray-900 mb-2">Code-Review & empirische Datenauswertung (Python/R)</h4>
-                        <p class="text-gray-600 text-sm line-clamp-3">Unterstützung bei der statistischen Auswertung deiner empirischen Daten in Python, R oder SPSS für deine Thesis.</p>
+                    <!-- Fach -->
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Fachbereich</label>
+                        <select id="filterFach" onchange="applyFilters()" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                            <option value="all">Alle Fächer</option>
+                            <option value="Wirtschaft">Wirtschaftswissenschaften</option>
+                            <option value="Jura">Rechtswissenschaften (Jura)</option>
+                            <option value="Informatik">Informatik / Data Science</option>
+                            <option value="Medizin">Medizin</option>
+                        </select>
                     </div>
-                    <div class="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center font-bold text-xs text-amber-800">SK</div>
-                            <span class="text-xs font-medium text-gray-700">Sarah K. (Data Science)</span>
+
+                    <!-- Berlin Universities -->
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Universität (Berlin)</label>
+                        <select id="filterUni" onchange="applyFilters()" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                            <option value="all">Alle Unis</option>
+                            <option value="HU Berlin">HU Berlin (Humboldt)</option>
+                            <option value="FU Berlin">FU Berlin (Freie Uni)</option>
+                            <option value="TU Berlin">TU Berlin (Technische Uni)</option>
+                            <option value="HTW Berlin">HTW Berlin</option>
+                            <option value="HWR Berlin">HWR Berlin</option>
+                        </select>
+                    </div>
+
+                    <!-- Semester -->
+                    <div class="mb-5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Mindestsemester</label>
+                        <select id="filterSemester" onchange="applyFilters()" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                            <option value="all">Egal welches Semester</option>
+                            <option value="3">Ab 3. Semester</option>
+                            <option value="5">Ab 5. Semester (Fortgeschritten)</option>
+                            <option value="7">Im Master / Absolvent</option>
+                        </select>
+                    </div>
+
+                    <!-- Max Price -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Maximalpreis: <span id="priceLabel" class="font-bold text-indigo-600">30€</span></label>
+                        <input type="range" id="filterPrice" min="10" max="30" value="30" oninput="updatePriceLabel(); applyFilters();" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                            <span>10€</span>
+                            <span>30€</span>
                         </div>
-                        <span class="font-bold text-indigo-600 text-lg">ab 25€ / Std.</span>
+                    </div>
+                </aside>
+
+                <!-- DYNAMIC MARKETPLACE GRID -->
+                <div class="lg:col-span-3">
+                    <div class="mb-4 text-sm text-gray-500 font-medium" id="resultsCount">
+                        Zeige alle Angebote an
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6" id="marketplace-dynamic-grid">
+                        <!-- Die Karten werden komplett dynamisch via JavaScript aus den unten stehenden Daten generiert -->
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="empty-state" class="hidden text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
+                        <i class="fa-solid fa-folder-open text-gray-300 text-4xl mb-3"></i>
+                        <p class="text-gray-500 font-medium">Keine Studenten mit diesen Filtereinstellungen gefunden.</p>
                     </div>
                 </div>
 
             </div>
         </div>
-    </section>
+
+    </main>
 
     <!-- Footer mit Werten -->
     <footer class="bg-slate-900 text-slate-400 py-12 px-4 border-t border-slate-800">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
                 <i class="fa-solid fa-graduation-cap text-emerald-500 text-2xl"></i>
                 <span class="text-xl font-bold text-white">Studis.</span>
             </div>
@@ -202,29 +226,198 @@
         </div>
     </footer>
 
-    <!-- Filter Skript für den Marktplatz -->
+    <!-- JAVASCRIPT FOR PAGE SWAPPING & DYNAMIC FILTERING -->
     <script>
-        function filterFach(fach) {
-            const cards = document.querySelectorAll('#marketplace-grid > div');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Buttons stylen
-            buttons.forEach(btn => {
-                if(btn.textContent.includes(fach) || (fach === 'all' && btn.textContent === 'Alle Fächer')) {
-                    btn.className = "filter-btn bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition";
-                } else {
-                    btn.className = "filter-btn bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition";
+        // DATENBANK DER STUDENTEN (Dummies für Berlin)
+        const studentenDaten = [
+            {
+                id: 1,
+                name: "Anna M.",
+                status: "Master",
+                semester: 8,
+                fach: "Wirtschaft",
+                fachAnzeige: "Wirtschaftswissenschaften",
+                uni: "HU Berlin",
+                titel: "Korrekturlesen & Feedback BWL/VWL Hausarbeiten",
+                beschreibung: "Ich helfe dir beim Academic Writing, überprüfe den roten Faden deiner Argumentation und korrigiere Zitierfehler (APA/Harvard).",
+                preis: 15,
+                rating: "4.9",
+                reviews: 32,
+                color: "bg-indigo-200 text-indigo-800"
+            },
+            {
+                id: 2,
+                name: "Tim L.",
+                status: "Staatsexamen",
+                semester: 6,
+                fach: "Jura",
+                fachAnzeige: "Rechtswissenschaften",
+                uni: "FU Berlin",
+                titel: "Gutachtenstil-Check & Remonetarisierung Jura",
+                beschreibung: "Prüfung von Zwischenprüfungs-Hausarbeiten im Zivilrecht und Öffentlichen Recht auf korrekten Gutachtenstil und Argumentationstiefe.",
+                preis: 22,
+                rating: "5.0",
+                reviews: 14,
+                color: "bg-emerald-200 text-emerald-800"
+            },
+            {
+                id: 3,
+                name: "Sarah K.",
+                status: "Data Science",
+                semester: 4,
+                fach: "Informatik",
+                fachAnzeige: "Informatik",
+                uni: "TU Berlin",
+                titel: "Code-Review & empirische Datenauswertung (Python/R)",
+                beschreibung: "Unterstützung bei der statistischen Auswertung deiner empirischen Daten in Python, R oder SPSS für deine Hausarbeit oder Thesis.",
+                preis: 25,
+                rating: "4.8",
+                reviews: 19,
+                color: "bg-amber-200 text-amber-800"
+            },
+            {
+                id: 4,
+                name: "Max Z.",
+                status: "Bachelor",
+                semester: 3,
+                fach: "Wirtschaft",
+                fachAnzeige: "Wirtschaftswissenschaften",
+                uni: "HTW Berlin",
+                titel: "Formatiierung nach Richtlinien & Quellen-Recherche",
+                beschreibung: "Ich bringe deine Hausarbeit in Word/LaTeX auf Vordermann gemäß den Formatvorgaben deines Lehrstuhls.",
+                preis: 12,
+                rating: "4.6",
+                reviews: 8,
+                color: "bg-blue-200 text-blue-800"
+            },
+            {
+                id: 5,
+                name: "Elena R.",
+                status: "Promotion",
+                semester: 11,
+                fach: "Medizin",
+                fachAnzeige: "Medizin / Biologie",
+                uni: "HU Berlin",
+                titel: "Lektorat für medizinische & naturwissenschaftliche Arbeiten",
+                beschreibung: "Wissenschaftliches Fachlektorat für Medizin- und Biologiestudierende. Fokus auf präzise medizinische Nomenklatur.",
+                preis: 30,
+                rating: "5.0",
+                reviews: 25,
+                color: "bg-purple-200 text-purple-800"
+            }
+        ];
+
+        // PAGE ROUTING LOGIC
+        function showPage(pageId) {
+            // Alle Seiten verstecken
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            // Gewünschte Seite anzeigen
+            document.getElementById('page-' + pageId).classList.add('active');
+            // Scroll nach oben
+            window.scrollTo(0, 0);
+
+            if (pageId === 'marketplace') {
+                applyFilters(); // Render den Marktplatz initial
+            }
+        }
+
+        // PRICE LABEL UPDATE
+        function updatePriceLabel() {
+            const val = document.getElementById('filterPrice').value;
+            document.getElementById('priceLabel').textContent = val + "€";
+        }
+
+        // FILTER ENGINE
+        function applyFilters() {
+            const searchVal = document.getElementById('searchBar').value.toLowerCase();
+            const fachVal = document.getElementById('filterFach').value;
+            const uniVal = document.getElementById('filterUni').value;
+            const semesterVal = document.getElementById('filterSemester').value;
+            const priceVal = parseInt(document.getElementById('filterPrice').value);
+
+            const filtered = studentenDaten.filter(stud => {
+                // Suche
+                const matchesSearch = stud.titel.toLowerCase().includes(searchVal) || stud.beschreibung.toLowerCase().includes(searchVal) || stud.name.toLowerCase().includes(searchVal);
+                // Fach
+                const matchesFach = (fachVal === 'all' || stud.fach === fachVal);
+                // Uni
+                const matchesUni = (uniVal === 'all' || stud.uni === uniVal);
+                // Semester
+                let matchesSemester = true;
+                if (semesterVal !== 'all') {
+                    matchesSemester = stud.semester >= parseInt(semesterVal);
                 }
+                // Preis
+                const matchesPrice = stud.preis <= priceVal;
+
+                return matchesSearch && matchesFach && matchesUni && matchesSemester && matchesPrice;
             });
 
-            // Karten filtern
-            cards.forEach(card => {
-                if (fach === 'all' || card.getAttribute('data-fach') === fach) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+            renderCards(filtered);
+        }
+
+        // RENDER CARDS INTO THE GRID
+        function renderCards(data) {
+            const grid = document.getElementById('marketplace-dynamic-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countLabel = document.getElementById('resultsCount');
+            
+            grid.innerHTML = '';
+            countLabel.textContent = `${data.length} ${data.length === 1 ? 'Angebot' : 'Angebote'} in Berlin gefunden`;
+
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            data.forEach(stud => {
+                const cardHtml = `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex flex-col gap-1">
+                                    <span class="bg-slate-100 text-slate-800 text-xs font-bold px-2.5 py-0.5 rounded-md w-fit">
+                                        <i class="fa-solid fa-university mr-1 text-indigo-500"></i>${stud.uni}
+                                    </span>
+                                    <span class="text-xs text-gray-500 font-medium">${stud.fachAnzeige} • ${stud.semester}. Sem.</span>
+                                </div>
+                                <span class="text-gray-500 text-sm font-semibold"><i class="fa-solid fa-star text-amber-400 mr-1"></i>${stud.rating} (${stud.reviews})</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-2 leading-snug">${stud.titel}</h4>
+                            <p class="text-gray-600 text-sm line-clamp-3">${stud.beschreibung}</p>
+                        </div>
+                        <div class="p-4 border-t border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full ${stud.color} flex items-center justify-center font-bold text-xs shadow-inner">
+                                    ${stud.name.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-gray-800">${stud.name}</span>
+                                    <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">${stud.status}</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-extrabold text-indigo-600 text-lg">${stud.preis}€</span>
+                                <span class="text-[10px] text-gray-400 block -mt-1">Std. / Seite</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
             });
+        }
+
+        // RESET ALL FILTERS
+        function resetFilters() {
+            document.getElementById('searchBar').value = '';
+            document.getElementById('filterFach').value = 'all';
+            document.getElementById('filterUni').value = 'all';
+            document.getElementById('filterSemester').value = 'all';
+            document.getElementById('filterPrice').value = 30;
+            updatePriceLabel();
+            applyFilters();
         }
     </script>
 </body>
