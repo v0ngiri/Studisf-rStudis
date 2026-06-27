@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studis - Marktplatz & Uni-Ratings</title>
-    <!-- Подключение Tailwind CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Иконки FontAwesome -->
+    <title>StudisHelfenStudis - Marktplatz & Uni-Ratings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .page { display: none; }
@@ -20,24 +18,24 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
-    <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+    <!-- NAVIGATION -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
                     <i class="fa-solid fa-graduation-cap text-indigo-600 text-3xl"></i>
-                    <span class="text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent font-extrabold">Studis.</span>
+                    <span class="text-2xl font-black tracking-tight bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">StudisHelfenStudis.</span>
                 </div>
-                <div class="hidden md:flex space-x-8 font-medium">
+                <div class="hidden md:flex space-x-6 font-medium">
                     <button onclick="showPage('marketplace')" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Marktplatz</button>
                     <button onclick="showPage('ratings-hub')" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Prof- & Modul-Ratings</button>
-                    <button onclick="showPage('home')" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Empirie-Pool</button>
+                    <button onclick="showPage('empirie')" class="text-gray-600 hover:text-indigo-600 transition cursor-pointer">Empirie-Pool</button>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-semibold hidden sm:inline-block">
                         <i class="fa-solid fa-shield-check mr-1"></i> Nur mit Uni-Mail
                     </span>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition shadow-sm cursor-pointer">
+                    <button onclick="showToast('Registrierungsfunktion demnächst verfügbar!', 'info')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition shadow-sm cursor-pointer">
                         Registrieren
                     </button>
                 </div>
@@ -45,22 +43,25 @@
         </div>
     </nav>
 
-    <!-- ОСНОВНАЯ ОБЛАСТЬ КОНТЕНТА -->
+    <!-- TOAST BENACHRICHTIGUNGSSYSTEM (Kein alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- MAIN CONTENT AREA -->
     <main class="flex-grow">
         
-        <!-- СТРАНИЦА 1: ГЛАВНАЯ СТРАНИЦА -->
+        <!-- PAGE 1: HOME PAGE -->
         <div id="page-home" class="page active">
-            <!-- Hero-секция -->
+            <!-- Hero-Sektion -->
             <header class="bg-gradient-to-br from-indigo-900 via-slate-900 to-emerald-950 text-white py-20 px-4">
                 <div class="max-w-5xl mx-auto text-center">
                     <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-3 py-1 rounded-full text-sm font-medium">
                         Von Studierenden für Studierende 🌿
                     </span>
                     <h1 class="text-4xl md:text-6xl font-extrabold mt-6 tracking-tight leading-tight">
-                        Dein Studium. <br class="hidden md:block">Bessere Noten. Echte Insights.
+                        Dein Studium. <br class="hidden md:block">Bessere Noten. Echte Unterstützung.
                     </h1>
                     <p class="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
-                        Finde verifizierte Hilfe für deine Hausarbeit, checke ehrliche Bewertungen zu deinen Profs und finde Teilnehmer für deine empirische Forschung.
+                        Finde verifizierte Hilfe für deine Hausarbeit, checke ehrliche Bewertungen zu deinen Profs und finde Teilnehmer für deine empirische Forschung im brandneuen Empirie-Pool.
                     </p>
                     <div class="mt-10 flex flex-wrap justify-center gap-4">
                         <button onclick="showPage('marketplace')" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3 rounded-lg transition shadow-lg cursor-pointer">
@@ -69,53 +70,69 @@
                         <button onclick="showPage('ratings-hub')" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-medium px-6 py-3 rounded-lg transition cursor-pointer">
                             Prof- & Modul-Ratings ansehen
                         </button>
+                        <button onclick="showPage('empirie')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-lg transition cursor-pointer">
+                            Empirie-Pool & Studien-Konstruktor
+                        </button>
                     </div>
                 </div>
             </header>
 
-            <!-- Блок ключевых фич -->
+            <!-- Killer-Features Block -->
             <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-slate-900">Unsere Killer-Features</h2>
-                    <p class="text-gray-500 mt-2">Was uns von normalen Plattformen unterscheidet.</p>
+                    <h2 class="text-3xl font-bold text-slate-900">Unsere Features im Überblick</h2>
+                    <p class="text-gray-500 mt-2">Profitiere von einer geschlossenen, ehrlichen studentischen Gemeinschaft.</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Фича 1: Рейтинги -->
-                    <div onclick="showPage('ratings-hub')" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition cursor-pointer">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1: Marktplatz -->
+                    <div onclick="showPage('marketplace')" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition cursor-pointer">
                         <div>
                             <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 text-xl mb-6">
-                                <i class="fa-solid fa-star-half-stroke"></i>
+                                <i class="fa-solid fa-shop"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-4 font-extrabold">Individuelles Insider-Rating</h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                Schluss mit bösen Überraschungen im Semester! Filtere Module, Lehrstühle und Professoren nach Fachbereich (Fach). Erfahre anonym, aber <strong>durch Uni-Mail verifiziert</strong>, wie fair die Notengebung und wie gut die Vorlesung wirklich ist.
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 font-extrabold">Studien-Marktplatz</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Benötigst du ein professionelles Lektorat, Hilfe bei LaTeX oder Unterstützung bei deiner statistischen Auswertung? Finde qualifizierte und bezahlbare Helfer direkt an deiner Uni.
                             </p>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
-                            <div class="flex items-center justify-between text-sm">
-                                <span class="font-semibold text-gray-700">Beispiel: Prof. Dr. Müller (FU Berlin)</span>
-                                <span class="text-amber-500 font-bold"><i class="fa-solid fa-star"></i> 4.8 / 5</span>
-                            </div>
+                        <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-indigo-600 font-semibold flex justify-between items-center">
+                            <span>Jetzt Helfer finden</span>
+                            <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
 
-                    <!-- Фича 2: Опросники -->
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
+                    <!-- Feature 2: Ratings -->
+                    <div onclick="showPage('ratings-hub')" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition cursor-pointer">
                         <div>
                             <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl mb-6">
-                                <i class="fa-solid fa-chart-bar"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-4 font-extrabold">Empirie-Pool für Hausarbeiten</h3>
-                            <p class="text-gray-600 leading-relaxed">
-                                Du schreibst eine empirische Haus- oder Bachelorarbeit und brauchst dringend Umfrageteilnehmer? Poste deinen Fragebogen in unserem Netzwerk und erhalte Antworten von echten, verifizierten Studierenden passender Fachrichtungen.
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 font-extrabold">Insider-Ratings</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Filtere Module, Lehrstühle und Professoren nach Fachbereich. Erfahre anonym, aber durch deine Uni-Mail verifiziert, wie fair die Notengebung und wie gut die Vorlesung wirklich ist.
                             </p>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-gray-100 bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-2xl">
-                            <div class="flex items-center justify-between text-sm">
-                                <span class="font-semibold text-gray-700">Aktive Umfragen im Pool:</span>
-                                <span class="bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded">1,420 Teilnehmer online</span>
+                        <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-indigo-600 font-semibold flex justify-between items-center">
+                            <span>Ratings erkunden</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3: Empirie-Pool -->
+                    <div onclick="showPage('empirie')" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition cursor-pointer">
+                        <div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 text-xl mb-6">
+                                <i class="fa-solid fa-flask"></i>
                             </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-4 font-extrabold">Empirie-Pool & Konstruktor</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Brauchst du dringend Umfrageteilnehmer für deine empirische Hausarbeit? Erstelle deine Studie in unserem Konstruktor und erreiche verifizierte Teilnehmer deiner Zielgruppe.
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-gray-100 text-xs text-indigo-600 font-semibold flex justify-between items-center">
+                            <span>Konstruktor starten</span>
+                            <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>
@@ -208,7 +225,7 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА 3: ХАБ РЕЙТИНГОВ (ВЫБОР УНИВЕРСИТЕТА) -->
+        <!-- СТРАНИЦА 3: ХАБ РЕЙТИНГОВ -->
         <div id="page-ratings-hub" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Uni-Ratings</span>
@@ -271,15 +288,13 @@
             </div>
         </div>
 
-        <!-- СТРАНИЦА 4: РЕЙТИНГ НАПРАВЛЕНИЙ (FACH) В ВЫБРАННОМ УНИВЕРСИТЕТЕ -->
+        <!-- СТРАНИЦА 4: РЕЙТИНГ НАПРАВЛЕНИЙ -->
         <div id="page-uni-details" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <!-- Хлебные крошки (Breadcrumbs) -->
             <nav class="flex text-sm text-gray-500 mb-6 font-medium gap-2">
                 <span onclick="showPage('ratings-hub')" class="hover:text-indigo-600 cursor-pointer">Ratings</span>
                 <span>/</span>
                 <span id="breadcrumb-uni-name" class="text-gray-800 font-bold">FU Berlin</span>
             </nav>
-
             <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h2 class="text-3xl font-extrabold text-slate-900" id="uni-detail-title">FU Berlin - Fachbereiche</h2>
@@ -290,16 +305,11 @@
                     <span class="text-xl font-extrabold text-indigo-600" id="uni-total-score">4.2★</span>
                 </div>
             </div>
-
-            <!-- Сетка направлений внутри университета -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="depts-grid">
-                <!-- Рендерится динамически (например, в FU сильная Политология, но слабая Экономика) -->
-            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="depts-grid"></div>
         </div>
 
         <!-- СТРАНИЦА 5: ПРОФЕССОР ИЛИ МОДУЛЬ ВНУТРИ НАПРАВЛЕНИЯ -->
         <div id="page-dept-view" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <!-- Хлебные крошки (Breadcrumbs) -->
             <nav class="flex text-sm text-gray-500 mb-6 font-medium gap-2">
                 <span onclick="showPage('ratings-hub')" class="hover:text-indigo-600 cursor-pointer">Ratings</span>
                 <span>/</span>
@@ -307,13 +317,10 @@
                 <span>/</span>
                 <span id="breadcrumb-dept-name" class="text-gray-800 font-bold">Politikwissenschaft</span>
             </nav>
-
             <div class="mb-8">
                 <h2 class="text-3xl font-extrabold text-slate-900" id="dept-view-title">Politikwissenschaft (FU Berlin)</h2>
                 <p class="text-gray-500 mt-1">Triff deine Auswahl: Möchtest du Dozenten bewerten oder Module & Lehrveranstaltungen checken?</p>
             </div>
-
-            <!-- Вкладки-переключатели (Tabs) -->
             <div class="flex border-b border-gray-200 mb-8">
                 <button onclick="toggleDeptFilter('prof')" id="tab-prof" class="rating-tab active py-4 px-6 font-semibold border-b-2 border-transparent hover:text-indigo-600 transition cursor-pointer flex items-center gap-2">
                     <i class="fa-solid fa-user-tie"></i> Professoren & Dozenten
@@ -322,21 +329,12 @@
                     <i class="fa-solid fa-book-open"></i> Module & Lehrveranstaltungen
                 </button>
             </div>
-
-            <!-- СПИСОК ПРЕПОДАВАТЕЛЕЙ -->
-            <div id="sect-prof" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Генерируется скриптом -->
-            </div>
-
-            <!-- СПИСОК МОДУЛЕЙ -->
-            <div id="sect-module" class="space-y-6 hidden">
-                <!-- Генерируется скриптом -->
-            </div>
+            <div id="sect-prof" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="sect-module" class="space-y-6 hidden"></div>
         </div>
 
         <!-- СТРАНИЦА 6: ПОДРОБНЫЙ ПРОФИЛЬ ПРОФЕССОРА -->
         <div id="page-prof-profile" class="page max-w-5xl mx-auto px-4 py-10">
-            <!-- Хлебные крошки (Breadcrumbs) -->
             <nav class="flex text-sm text-gray-500 mb-6 font-medium gap-2">
                 <span onclick="showPage('ratings-hub')" class="hover:text-indigo-600 cursor-pointer">Ratings</span>
                 <span>/</span>
@@ -346,9 +344,7 @@
                 <span>/</span>
                 <span id="breadcrumb-prof-name" class="text-gray-800 font-bold">Prof. Dr. Becker</span>
             </nav>
-
             <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
-                <!-- Header профиля -->
                 <div class="bg-gradient-to-r from-indigo-900 to-indigo-950 text-white p-8">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div class="flex items-center gap-4">
@@ -366,8 +362,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Подробные метрики -->
                 <div class="p-8 grid md:grid-cols-3 gap-6 border-b border-gray-100">
                     <div class="bg-gray-50 p-4 rounded-xl">
                         <span class="text-xs text-gray-500 font-bold block uppercase tracking-wider mb-1">Verständlichkeit</span>
@@ -397,20 +391,15 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Блок отзывов -->
                 <div class="p-8">
                     <h3 class="font-extrabold text-xl text-slate-900 mb-6">Studentische Rezensionen</h3>
-                    <div class="space-y-6" id="prof-reviews">
-                        <!-- Отзывы генерируются скриптом -->
-                    </div>
+                    <div class="space-y-6" id="prof-reviews"></div>
                 </div>
             </div>
         </div>
 
-        <!-- СТРАНИЦА 7: КУРСЫ (ЛЕКЦИЯ/СЕМИНАР) ВНУТРИ МОДУЛЯ -->
+        <!-- СТРАНИЦА 7: КУРСЫ ВНУТРИ МОДУЛЯ -->
         <div id="page-module-details" class="page max-w-5xl mx-auto px-4 py-10">
-            <!-- Хлебные крошки (Breadcrumbs) -->
             <nav class="flex text-sm text-gray-500 mb-6 font-medium gap-2">
                 <span onclick="showPage('ratings-hub')" class="hover:text-indigo-600 cursor-pointer">Ratings</span>
                 <span>/</span>
@@ -420,9 +409,7 @@
                 <span>/</span>
                 <span id="breadcrumb-course-modul" class="text-gray-800 font-bold">Modul: Analyse</span>
             </nav>
-
             <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-8">
-                <!-- Шапка модуля -->
                 <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-8">
                     <div class="flex justify-between items-center">
                         <div>
@@ -435,8 +422,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Детали модуля (Сложность и загруженность) -->
                 <div class="p-8 grid md:grid-cols-2 gap-6 border-b border-gray-100 bg-gray-50/50">
                     <div class="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-100">
                         <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-lg flex items-center justify-center text-lg"><i class="fa-solid fa-gauge-high"></i></div>
@@ -453,12 +438,126 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Курсы и Лекции внутри этого модуля -->
                 <div class="p-8">
                     <h3 class="font-extrabold text-xl text-slate-900 mb-6">Lehrveranstaltungen in diesem Modul</h3>
-                    <div class="space-y-4 animate-fade-in" id="course-list-holder">
-                        <!-- Список лекций и семинаров -->
+                    <div class="space-y-4" id="course-list-holder"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА 8: ЭМПИРИ-ПУЛЬ (NEUE SEITE) -->
+        <div id="page-empirie" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Empirie-Pool & Studien-Konstruktor 🔬</span>
+                <h1 class="text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Umfragen & Empirische Forschung</h1>
+                <p class="text-gray-500 mt-2">Erstelle im Konstruktor deine eigene Studie oder unterstütze andere Studierende durch deine Teilnahme bei ihren Bachelor- und Masterarbeiten.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8">
+                <!-- LEFTSIDE: KONSTRUKTOR FORMULAR -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-gray-200 h-fit">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
+                        <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-slate-900">Studien-Konstruktor</h3>
+                            <p class="text-xs text-gray-400">Veröffentliche deine Forschung im Netzwerk</p>
+                        </div>
+                    </div>
+
+                    <form id="study-constructor-form" onsubmit="createNewStudy(event)" class="space-y-4">
+                        <!-- Thema -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Thema / Titel der Studie</label>
+                            <input type="text" id="const-thema" required placeholder="z.B. Nutzung von ChatGPT im Jura-Studium" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <!-- Forschungstyp -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Typ der Forschung</label>
+                            <select id="const-typ" required class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="Quantitativ">Quantitativ (Online-Fragebogen)</option>
+                                <option value="Qualitativ">Qualitativ (Interviews, Fokusgruppen)</option>
+                                <option value="Mixed Methods">Mixed Methods (Kombiniert)</option>
+                            </select>
+                        </div>
+
+                        <!-- Fachbereich -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Fachbereich</label>
+                            <select id="const-fach" required class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="Wirtschaft">Wirtschaftswissenschaften</option>
+                                <option value="Jura">Rechtswissenschaften (Jura)</option>
+                                <option value="Informatik">Informatik / IT</option>
+                                <option value="Medizin">Medizin & Naturwissenschaften</option>
+                                <option value="Geisteswissenschaften">Geisteswissenschaften</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Zielgruppe -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Zielgruppe</label>
+                                <input type="text" id="const-zielgruppe" required placeholder="z.B. Alle Studierenden" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                            <!-- Dauer -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Dauer (Minuten)</label>
+                                <input type="number" id="const-dauer" required min="1" max="60" placeholder="z.B. 5" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- Externer Link -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Umfrage-Link (Qualtrics, Google Forms etc.)</label>
+                            <input type="url" id="const-link" required placeholder="https://forms.gle/..." class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <!-- Incentive -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Incentive / Belohnung</label>
+                            <input type="text" id="const-incentive" placeholder="z.B. Verlosung von 3x 15€ Gutscheinen oder Umfrage-Tausch" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-lg transition shadow-md cursor-pointer flex items-center justify-center gap-2 mt-2">
+                            <i class="fa-solid fa-paper-plane"></i> Studie im Pool veröffentlichen
+                        </button>
+                    </form>
+                </div>
+
+                <!-- RIGHTSIDE: ACTIVE SURVEYS LISTING -->
+                <div class="lg:col-span-7">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <h3 class="font-extrabold text-xl text-slate-900"><i class="fa-solid fa-clipboard-list mr-2 text-indigo-600"></i>Aktive Studien im Pool</h3>
+                        <!-- Filter für Umfragen -->
+                        <div class="flex gap-2">
+                            <select id="pool-filter-fach" onchange="filterStudies()" class="bg-white border border-gray-300 rounded-lg px-2.5 py-1.5 text-xs font-medium focus:ring-2 focus:ring-indigo-500">
+                                <option value="all">Alle Fächer</option>
+                                <option value="Wirtschaft">Wirtschaft</option>
+                                <option value="Jura">Jura</option>
+                                <option value="Informatik">Informatik</option>
+                                <option value="Medizin">Medizin</option>
+                                <option value="Geisteswissenschaften">Geisteswissenschaften</option>
+                            </select>
+                            <select id="pool-filter-typ" onchange="filterStudies()" class="bg-white border border-gray-300 rounded-lg px-2.5 py-1.5 text-xs font-medium focus:ring-2 focus:ring-indigo-500">
+                                <option value="all">Alle Typen</option>
+                                <option value="Quantitativ">Quantitativ</option>
+                                <option value="Qualitativ">Qualitativ</option>
+                                <option value="Mixed Methods">Mixed Methods</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Liste der Studien -->
+                    <div id="active-studies-list" class="space-y-4">
+                        <!-- Wird dynamisch gerendert -->
+                    </div>
+
+                    <!-- Empty state if no studies matches filter -->
+                    <div id="studies-empty-state" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-gray-300">
+                        <i class="fa-solid fa-ban text-gray-300 text-4xl mb-3"></i>
+                        <p class="text-gray-500 font-medium">Aktuell keine passenden Studien in dieser Kombination vorhanden.</p>
                     </div>
                 </div>
             </div>
@@ -471,16 +570,15 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
                 <i class="fa-solid fa-graduation-cap text-emerald-500 text-2xl"></i>
-                <span class="text-xl font-bold text-white">Studis.</span>
+                <span class="text-xl font-bold text-white">StudisHelfenStudis.</span>
             </div>
             <div class="text-sm text-center md:text-right">
                 <p class="text-slate-300">🌿 People for People – Für Klimagerechtigkeit und faire Bildungschancen.</p>
-                <p class="mt-2 text-xs text-slate-500">&copy; 2026 Studis Marketplace. Alle Rechte vorbehalten. Verifizierung via Edu-Mail.</p>
+                <p class="mt-2 text-xs text-slate-500">&copy; 2026 StudisHelfenStudis. Alle Rechte vorbehalten. Verifizierung via Edu-Mail.</p>
             </div>
         </div>
     </footer>
 
-    <!-- СЦЕНАРИИ JS ДЛЯ SPA НАВИГАЦИИ И РЕЙТИНГОВОЙ СИСТЕМЫ -->
     <script>
         // --- ДИНАМИЧЕСКАЯ БАЗА ДАННЫХ РЕЙТИНГОВ ---
         const ratingsDatabase = {
@@ -634,23 +732,65 @@
             }
         };
 
-        // --- ДАННЫЕ СТУДЕНТОВ ДЛЯ МАРКЕТПЛЕЙСА ---
+        // --- STREAMING_CHUNK: Neue Beispiele für den Marktplatz hinzufügen (9 Profile insgesamt) ---
         const studentenDaten = [
             { id: 1, name: "Anna M.", status: "Master", semester: 8, fach: "Wirtschaft", fachAnzeige: "Wirtschaftswissenschaften", uni: "HU Berlin", titel: "Korrekturlesen & Feedback BWL/VWL Hausarbeiten", beschreibung: "Ich helfe dir beim Academic Writing, überprüfe den roten Faden deiner Argumentation und korrigiere Zitierfehler (APA/Harvard).", preis: 15, rating: "4.9", reviews: 32, color: "bg-indigo-200 text-indigo-800" },
             { id: 2, name: "Tim L.", status: "Staatsexamen", semester: 6, fach: "Jura", fachAnzeige: "Rechtswissenschaften", uni: "FU Berlin", titel: "Gutachtenstil-Check & Remonetarisierung Jura", beschreibung: "Prüfung von Zwischenprüfungs-Hausarbeiten im Zivilrecht und Öffentlichen Recht auf korrekten Gutachtenstil und Argumentationstiefe.", preis: 22, rating: "5.0", reviews: 14, color: "bg-emerald-200 text-emerald-800" },
             { id: 3, name: "Sarah K.", status: "Data Science", semester: 4, fach: "Informatik", fachAnzeige: "Informatik", uni: "TU Berlin", titel: "Code-Review & empirische Datenauswertung (Python/R)", beschreibung: "Unterstützung bei der statistischen Auswertung deiner empirischen Daten in Python, R oder SPSS für deine Hausarbeit oder Thesis.", preis: 25, rating: "4.8", reviews: 19, color: "bg-amber-200 text-amber-800" },
-            { id: 4, name: "Max Z.", status: "Bachelor", semester: 3, fach: "Wirtschaft", fachAnzeige: "Wirtschaftswissenschaften", uni: "HTW Berlin", titel: "Formatiierung nach Richtlinien & Quellen-Recherche", beschreibung: "Ich bringe deine Hausarbeit in Word/LaTeX auf Vordermann gemäß den Formatvorgaben deines Lehrstuhls.", preis: 12, rating: "4.6", reviews: 8, color: "bg-blue-200 text-blue-800" },
-            { id: 5, name: "Elena R.", status: "Promotion", semester: 11, fach: "Medizin", fachAnzeige: "Medizin / Biologie", uni: "HU Berlin", titel: "Lektorat für medizinische & naturwissenschaftliche Arbeiten", beschreibung: "Wissenschaftliches Fachlektorat für Medizin- und Biologiestudierende. Fokus auf präzise medizinische Nomenklatur.", preis: 30, rating: "5.0", reviews: 25, color: "bg-purple-200 text-purple-800" }
+            { id: 4, name: "Max Z.", status: "Bachelor", semester: 3, fach: "Wirtschaft", fachAnzeige: "Wirtschaftswissenschaften", uni: "HTW Berlin", titel: "Formatierung nach Richtlinien & Quellen-Recherche", beschreibung: "Ich bringe deine Hausarbeit in Word/LaTeX auf Vordermann gemäß den exakten Formatvorgaben deines Lehrstuhls.", preis: 12, rating: "4.6", reviews: 8, color: "bg-blue-200 text-blue-800" },
+            { id: 5, name: "Elena R.", status: "Promotion", semester: 11, fach: "Medizin", fachAnzeige: "Medizin / Biologie", uni: "HU Berlin", titel: "Lektorat für medizinische & naturwissenschaftliche Arbeiten", beschreibung: "Wissenschaftliches Fachlektorat für Medizin- und Biologiestudierende. Fokus auf präzise medizinische Nomenklatur.", preis: 30, rating: "5.0", reviews: 25, color: "bg-purple-200 text-purple-800" },
+            { id: 6, name: "Lukas K.", status: "Bachelor", semester: 5, fach: "Informatik", fachAnzeige: "Informatik", uni: "HTW Berlin", titel: "Transkription & Audio-Interviews für Qualitativen Part", beschreibung: "Übernehme präzise Transkriptionen deiner Leitfadeninterviews nach Mayring inkl. Zeitstempel. Schnell, diskret und vertraulich.", preis: 14, rating: "4.7", reviews: 12, color: "bg-rose-200 text-rose-800" },
+            { id: 7, name: "Marie S.", status: "Master", semester: 9, fach: "Wirtschaft", fachAnzeige: "Statistik & SPSS Support", uni: "FU Berlin", titel: "Statistik-Hilfe, Regressionen & Hypothesentests", beschreibung: "Hilfe bei der kompletten statistischen Auswertung mit SPSS oder R. Ich helfe dir dabei, Tabellen zu verstehen und richtig zu interpretieren.", preis: 28, rating: "4.9", reviews: 41, color: "bg-teal-200 text-teal-800" },
+            { id: 8, name: "Felix W.", status: "Staatsexamen", semester: 7, fach: "Jura", fachAnzeige: "Rechtswissenschaften", uni: "HWR Berlin", titel: "Literaturrecherche, Gliederungshilfe & Exzerpte", beschreibung: "Suchst du verzweifelt nach relevanter Literatur im Beck-Online oder Juris? Ich erstelle exzellente Literaturverzeichnisse für dein Thema.", preis: 15, rating: "4.5", reviews: 6, color: "bg-cyan-200 text-cyan-800" },
+            { id: 9, name: "Sophia N.", status: "Master", semester: 10, fach: "Medizin", fachAnzeige: "Plagiatsprüfung & finale Strukturierung", uni: "HU Berlin", titel: "Akademische Plagiatsprüfung mit Profi-Software", beschreibung: "Schluss mit Plagiats-Ängsten. Ich jage deine Arbeit durch professionelle Software-Abgleiche und strukturiere den Anhang sauber um.", preis: 20, rating: "5.0", reviews: 18, color: "bg-sky-200 text-sky-800" }
+        ];
+
+        // --- STREAMING_CHUNK: Struktur der Empirischen Studien im Pool definieren ---
+        // --- DATA STATE EMPIERIE-POOL ---
+        const empirieStudien = [
+            {
+                id: 1,
+                thema: "Einfluss von Social Media Reals auf das Konsumverhalten von Gen-Z",
+                typ: "Quantitativ",
+                fach: "Wirtschaft",
+                zielgruppe: "Studierende im Alter von 18-26 Jahren",
+                dauer: 5,
+                link: "https://docs.google.com/forms/d/e/1FAIpQLSfD7PzX218...",
+                incentive: "Verlosung von 3x 15€ Wunschgutschein",
+                erstelltAm: "Heute"
+            },
+            {
+                id: 2,
+                thema: "Akzeptanz von KI-Diagnostik im Gesundheitssystem aus Sicht von Medizinstudierenden",
+                typ: "Qualitativ",
+                fach: "Medizin",
+                zielgruppe: "Nur Studierende der Medizin / Charité",
+                dauer: 15,
+                link: "https://qualtrics.com/ki-diagnostik-umfrage",
+                incentive: "Direktes Umfrage-Gegenfeedback & Umfrage-Tausch",
+                erstelltAm: "Gestern"
+            },
+            {
+                id: 3,
+                thema: "Mental-Health-Faktoren im Informatik-Bachelorstudium bei hohem Leistungsdruck",
+                typ: "Mixed Methods",
+                fach: "Informatik",
+                zielgruppe: "Informatik / IT-nahe Studiengänge",
+                dauer: 8,
+                link: "https://limesurvey.tu-berlin.de/mentalhealth-stud",
+                incentive: "Spende von 0.50€ pro Teilnehmer für wohltätige Zwecke",
+                erstelltAm: "Vor 3 Tagen"
+            }
         ];
 
         // --- СОСТОЯНИЕ ПРИЛОЖЕНИЯ ---
         let state = {
             currentUni: null,
             currentDept: null,
-            currentSubFilter: 'prof' // 'prof' или 'module'
+            currentSubFilter: 'prof'
         };
 
-        // --- НАВИГАЦИЯ МЕЖДУ СТРАНИЦАМИ ---
+        // --- NAV NAV NAVIGATION ---
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
@@ -658,7 +798,40 @@
 
             if (pageId === 'marketplace') {
                 applyFilters();
+            } else if (pageId === 'empirie') {
+                renderStudies();
             }
+        }
+
+        // --- STREAMING_CHUNK: Toast Notifications (Alternative zu alert) ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bgClass = "bg-emerald-600 text-white";
+            let iconClass = "fa-circle-check";
+            
+            if (type === 'error') {
+                bgClass = "bg-rose-600 text-white";
+                iconClass = "fa-circle-exclamation";
+            } else if (type === 'info') {
+                bgClass = "bg-indigo-600 text-white";
+                iconClass = "fa-circle-info";
+            }
+
+            toast.className = `${bgClass} px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 animate-bounce transition duration-300`;
+            toast.innerHTML = `
+                <i class="fa-solid ${iconClass}"></i>
+                <span class="text-xs font-semibold">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('animate-bounce');
+                toast.classList.add('opacity-0');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 3000);
         }
 
         // --- МАРКЕТПЛЕЙС: ПОЛЗУНОК ЦЕНЫ ---
@@ -753,20 +926,109 @@
             applyFilters();
         }
 
-        // --- СИСТЕМА РЕЙТИНГОВ: ЛОГИКА ---
-        
-        // Шаг 1: Выбор университета
+        // --- STREAMING_CHUNK: Logik für den Empirie-Pool & Konstruktor ---
+        // --- EMPIRIE POOL FUNKTIONEN ---
+        function renderStudies() {
+            const listHolder = document.getElementById('active-studies-list');
+            const emptyState = document.getElementById('studies-empty-state');
+            const filterFach = document.getElementById('pool-filter-fach').value;
+            const filterTyp = document.getElementById('pool-filter-typ').value;
+
+            listHolder.innerHTML = '';
+
+            const filteredStudies = empirieStudien.filter(study => {
+                const matchesFach = (filterFach === 'all' || study.fach === filterFach);
+                const matchesTyp = (filterTyp === 'all' || study.typ === filterTyp);
+                return matchesFach && matchesTyp;
+            });
+
+            if (filteredStudies.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filteredStudies.forEach(study => {
+                let badgeColor = "bg-blue-100 text-blue-800";
+                if(study.typ === 'Qualitativ') badgeColor = "bg-amber-100 text-amber-800";
+                if(study.typ === 'Mixed Methods') badgeColor = "bg-purple-100 text-purple-800";
+
+                const studyCard = `
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:border-indigo-500 hover:shadow-md transition">
+                        <div class="flex justify-between items-start gap-4 mb-3">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="${badgeColor} text-xs font-bold px-2.5 py-0.5 rounded-md">${study.typ}</span>
+                                <span class="bg-slate-100 text-slate-800 text-xs font-bold px-2.5 py-0.5 rounded-md">${study.fach}</span>
+                            </div>
+                            <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-clock mr-1"></i>${study.erstelltAm}</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 leading-snug mb-2">${study.thema}</h4>
+                        <div class="grid grid-cols-2 gap-4 text-xs text-gray-500 mb-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
+                            <div><strong>Zielgruppe:</strong> ${study.zielgruppe}</div>
+                            <div><strong>Dauer:</strong> ~${study.dauer} Minuten</div>
+                            <div class="col-span-2"><strong>Incentive:</strong> <span class="text-indigo-600 font-semibold">${study.incentive || 'Keine / Umfrage-Tausch'}</span></div>
+                        </div>
+                        <a href="${study.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition cursor-pointer">
+                            <i class="fa-solid fa-square-poll-vertical"></i> Jetzt Teilnehmen
+                        </a>
+                    </div>
+                `;
+                listHolder.innerHTML += studyCard;
+            });
+        }
+
+        function filterStudies() {
+            renderStudies();
+        }
+
+        function createNewStudy(event) {
+            event.preventDefault();
+
+            const thema = document.getElementById('const-thema').value;
+            const typ = document.getElementById('const-typ').value;
+            const fach = document.getElementById('const-fach').value;
+            const zielgruppe = document.getElementById('const-zielgruppe').value;
+            const dauer = parseInt(document.getElementById('const-dauer').value);
+            const link = document.getElementById('const-link').value;
+            const incentive = document.getElementById('const-incentive').value;
+
+            // Neue Studie zum Array hinzufügen
+            const newStudy = {
+                id: empirieStudien.length + 1,
+                thema,
+                typ,
+                fach,
+                zielgruppe,
+                dauer,
+                link,
+                incentive,
+                erstelltAm: "Gerade eben"
+            };
+
+            empirieStudien.unshift(newStudy); // Am Anfang einfügen
+
+            // Formular zurücksetzen
+            document.getElementById('study-constructor-form').reset();
+
+            // Ansicht aktualisieren
+            renderStudies();
+
+            // Erfolgsmeldung anzeigen
+            showToast("Studie wurde erfolgreich im Pool veröffentlicht!", "success");
+        }
+
+        // --- STREAMING_CHUNK: Ratings System Logik initialisieren ---
+        // --- UNI RATINGS DETAILS ---
         function selectUniversity(uniName) {
             state.currentUni = uniName;
             
-            // Настройка хлебных крошек
             document.getElementById('breadcrumb-uni-name').textContent = uniName;
             document.getElementById('uni-detail-title').textContent = `${uniName} - Fachbereiche`;
             
             const uniData = ratingsDatabase[uniName];
             document.getElementById('uni-total-score').textContent = `${uniData.gesamtRating}★`;
 
-            // Рендер направлений
             const deptsGrid = document.getElementById('depts-grid');
             deptsGrid.innerHTML = '';
 
@@ -793,12 +1055,10 @@
             showPage('uni-details');
         }
 
-        // Шаг 2: Выбор конкретного направления (Fach)
         function selectDepartment(deptName) {
             state.currentDept = deptName;
-            state.currentSubFilter = 'prof'; // Сброс таба на преподавателей по умолчанию
+            state.currentSubFilter = 'prof';
 
-            // Настройка хлебных крошек
             document.getElementById('breadcrumb-dept-uni').textContent = state.currentUni;
             document.getElementById('breadcrumb-dept-name').textContent = deptName;
             document.getElementById('dept-view-title').textContent = `${deptName} (${state.currentUni})`;
@@ -807,7 +1067,6 @@
             showPage('dept-view');
         }
 
-        // Рендер контента внутри направления (Преподы или Модули)
         function renderDeptEntities() {
             const uniData = ratingsDatabase[state.currentUni];
             const deptData = uniData.departments.find(d => d.name === state.currentDept);
@@ -815,7 +1074,6 @@
             const profSect = document.getElementById('sect-prof');
             const moduleSect = document.getElementById('sect-module');
 
-            // Очистка
             profSect.innerHTML = '';
             moduleSect.innerHTML = '';
 
@@ -872,7 +1130,6 @@
             }
         }
 
-        // Переключение фильтра Dozenten / Module
         function toggleDeptFilter(type) {
             state.currentSubFilter = type;
             document.querySelectorAll('.rating-tab').forEach(tab => tab.classList.remove('active'));
@@ -880,23 +1137,19 @@
             renderDeptEntities();
         }
 
-        // Шаг 3 (Вариант А): Профиль профессора
         function showProfProfile(profId) {
             const uniData = ratingsDatabase[state.currentUni];
             const deptData = uniData.departments.find(d => d.name === state.currentDept);
             const prof = deptData.professors.find(p => p.id === profId);
 
-            // Настройка хлебных крошек
             document.getElementById('breadcrumb-prof-uni').textContent = state.currentUni;
             document.getElementById('breadcrumb-prof-dept').textContent = state.currentDept;
             document.getElementById('breadcrumb-prof-name').textContent = prof.name;
 
-            // Настройка полей
             document.getElementById('prof-prof-name').textContent = prof.name;
             document.getElementById('prof-prof-dept').textContent = `Fachbereich: ${state.currentDept} (${state.currentUni})`;
             document.getElementById('prof-prof-rating').textContent = `${prof.rating}★`;
 
-            // Метрики
             document.getElementById('prof-metric-verst-val').textContent = prof.verstand;
             document.getElementById('prof-metric-verst-bar').style.width = `${(parseFloat(prof.verstand) / 5) * 100}%`;
 
@@ -906,7 +1159,6 @@
             document.getElementById('prof-metric-eng-val').textContent = prof.engagement;
             document.getElementById('prof-metric-eng-bar').style.width = `${(parseFloat(prof.engagement) / 5) * 100}%`;
 
-            // Отзывы
             const reviewsHolder = document.getElementById('prof-reviews');
             reviewsHolder.innerHTML = '';
 
@@ -926,24 +1178,20 @@
             showPage('prof-profile');
         }
 
-        // Шаг 3 (Вариант Б): Просмотр модуля и его лекций
         function showModuleDetails(moduleName) {
             const uniData = ratingsDatabase[state.currentUni];
             const deptData = uniData.departments.find(d => d.name === state.currentDept);
             const mod = deptData.modules.find(m => m.name === moduleName);
 
-            // Настройка хлебных крошек
             document.getElementById('breadcrumb-course-uni').textContent = state.currentUni;
             document.getElementById('breadcrumb-course-dept').textContent = state.currentDept;
             document.getElementById('breadcrumb-course-modul').textContent = mod.name;
 
-            // Настройка полей
             document.getElementById('course-mod-title').textContent = mod.name;
             document.getElementById('course-mod-rating').textContent = `${mod.rating}★`;
             document.getElementById('course-mod-diff').textContent = `${mod.diff}`;
             document.getElementById('course-mod-work').textContent = `${mod.workload}`;
 
-            // Генерация списка лекций и семинаров
             const listHolder = document.getElementById('course-list-holder');
             listHolder.innerHTML = '';
 
@@ -970,7 +1218,6 @@
             showPage('module-details');
         }
 
-        // --- ФУНКЦИИ ВОЗВРАТА (BACK NAVIGATION) ---
         function goBackToUni() {
             selectUniversity(state.currentUni);
         }
